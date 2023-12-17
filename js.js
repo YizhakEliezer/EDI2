@@ -1,48 +1,9 @@
 //myArray result
 let myArray = [];
+//myArray for data file
 let fileContentSearch;
 
 
-let comax="7290058140886";
-const options = {
-    "7290027600007-שופרסל": "7290027600007",
-    "7290058140886-יינות ביתן": comax,
-    "7290058140886-סמארט סרוייס": comax,
-    "7290058140886-שפע דיל": comax,
-    "7290058140886-אל דוד קמעונאות": comax,
-    "7290058140886-ליאור עדיקה": comax,
-    "7290058140886-סופר טל": comax,
-    "7290058140886-סופר לב": comax,
-    "7290058140886-שמואל שפע ברכה": comax,
-    "7290058140886-מעדני מניה": comax,
-    "7290058140886-ד.נ קמעונאות": comax,
-    "7290058140886-טסה שוקולד": comax,
-    "7290058140886-מעדני גורמה": comax,
-    "7290058140886-בול מרקט": comax,
-    "7290058140886-סאלח דבאח": comax,
-    "7290058140886-פוד מאסטר": comax,
-    "7290058140886-קשת גיבורים": comax,
-    "7290058140886-האחים יעקובי": comax,
-    "7290785400000-קשת טעמים ": "7290785400000",
-    "7290058206902-קולינאריק": "7290058206902",
-    "7290393000005-טיב טעם": "7290393000005",
-    "7290058186181-עדן טבע": "7290058186181",
-    "7290058140886-חצי חינם": comax,
-    "7290058140886-יוחננוף": comax,
-    "7290058140886-רמי לוי": comax,
-    "7290058140886-ב.ה לוי": comax,
-    "7290737000005-מנטה": "7290737000005",
-
-
-
-
-
-
-
-
-
-
-};
 
 
 //ondrop file
@@ -64,8 +25,12 @@ function handleFileInput(event) {
 
 }
 
+
+
+
 //name file
 function handleFiles(files) {
+    myArraymessageRusltFromFile=[];
     myArray = []; // Clear myArray before processing each file
     const fileName = files[0].name;
     document.getElementById('file-name').innerText = ` ${fileName}`;
@@ -78,13 +43,18 @@ function triggerFileInput() {
 }
 
 
+
+
+
 //read file and save in variable fileContentSearch
 function checkForValue(file) {
     const reader = new FileReader();
     reader.onload = function (event) {
+
         const fileContent = event.target.result;
         fileContentSearch = fileContent;
 
+        //Check the selected file structure type and run the appropriate function
         var selectedOption = document.getElementById("menuTypeStructure").value;
         if (selectedOption === "fileStructure") {
             alert("לא נבחר מבנה המסר לבדיקה");
@@ -94,6 +64,7 @@ function checkForValue(file) {
         else if (selectedOption === "hashavshevt") {
             chekFileHashavshevtSupdes();
         }
+
 
     };
     reader.readAsText(file);
@@ -118,22 +89,21 @@ function addElement(value) {
 }
 
 
+
 //messageRuslt eror
 function messageRuslt() {
     // Get the div element
     const messageRuslt = document.getElementById('messageRuslt');
-
     // Clear the existing content
     messageRuslt.innerHTML = "";
-
     myArray.forEach(function (element) {
-
-
         messageRuslt.innerHTML += `<p>${element}-</p>`;
 
     });
 
 }
+
+
 
 //messageRuslt fix
 function messageRusltFix() {
@@ -141,7 +111,6 @@ function messageRusltFix() {
     const messageRuslt = document.getElementById('messageRuslt');
     // Clear the existing content
     messageRuslt.innerHTML = "";
-
     myArray.forEach(function (element) {
         messageRuslt.innerHTML += `<p style="color: #79acf1;font-size: 25px;position: relative;text-align: center;top: 60px">${element}</p>`;
     });
@@ -150,9 +119,14 @@ function messageRusltFix() {
 
 
 
+
+
+
+
 //function to chekFile
 function chekFileFletSupdes() {
     myArray = [];
+    myArraymessageRusltFromFile=[];
 
     function compareStringsIgnoreCaseAndSpace(valueFromFile, constantValue) {
         // Check if value is defined and not empty
@@ -180,18 +154,11 @@ function chekFileFletSupdes() {
     const secondToLastLine = lines[lines.length - 2];
 
 
-    // const numRetailer = document.getElementById('retailer').value.toLowerCase();
+    const numRetailer = document.getElementById('retailer').value.toLowerCase();
     const numSupplier = document.getElementById('supplier').value;
     const numMessage = document.getElementById('message').value;
     const numSupplierSubnetNumber = document.getElementById('supplierSubnetNumber').value;
     const numBranchRetailer = document.getElementById('branchRetailer').value;
-
-
-    const numRetailerOptionsList = document.getElementById('retailer').value.toLowerCase();
-        const numRetailer = options[numRetailerOptionsList];
-
-
-
 
 
 
@@ -221,31 +188,41 @@ function chekFileFletSupdes() {
 
 
     let constantValuesBarcodeBoolean = true;
-
+    let ItemDataBoolean = true;
     function constantValuesBarcode() {
         for (let i = 3; i < lines.length - 3; i++) {
             const BarcodeArryStartOfLine = fileContentSearch.split('\n')[i].substring(0, 8);
             if (compareStringsIgnoreCaseAndSpace(BarcodeArryStartOfLine, LINE0201)) {
 
             } else {
-                constantValuesBarcodeBoolean = false;
-                addElement("תחילית מקט חסר שורה " + (i + 1))
+                if (compareStringsIgnoreCaseAndSpace(BarcodeArryStartOfLine, LINE0101)){
+                    const surfaceIdentificationNumber = fileContentSearch.split('\n')[i].substring(50, 68);
+                    if (surfaceIdentificationNumber.trim()===""){
+                        ItemDataBoolean = false;
+                        addElement("מספר זיהוי משטח חסר " + (i + 1))
+                    }
+                }
+                else {
+                    constantValuesBarcodeBoolean = false;
+                    addElement("תחילית מקט חסר שורה " + (i + 1))
+                }
             }
         }
     }
 
 
-    let valuesBarcodeBoolean = true;
 
+    // function for checking the c Values of  barcodes is not empty or with spaces
+    let valuesBarcodeBoolean = true;
     function valuesBarcode() {
         for (let r = 3; r < lines.length - 3; r++) {
-
-
+            const BarcodeArryStartOfLine = fileContentSearch.split('\n')[r].substring(0, 8);
+            if (compareStringsIgnoreCaseAndSpace(BarcodeArryStartOfLine, LINE0101)){
+               r++
+            }
             const barcodeEmpty = fileContentSearch.split('\n')[r].substring(8, 9);
             const barcodeWithspaces = fileContentSearch.split('\n')[r].substring(9, 22);
             const mbarcodeWithspacesValue = barcodeWithspaces;
-
-
             if (barcodeEmpty.trim() === "") {
                 valuesBarcodeBoolean = false;
                 addElement("ברקוד חסר או שגוי שורה " + (r + 1));
@@ -266,16 +243,12 @@ function chekFileFletSupdes() {
                             }
                             break;
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     }
+
 
 
     //chek barcode is validi
@@ -295,6 +268,9 @@ function chekFileFletSupdes() {
     //valueFromFile line 2
     const firstLineDetailsFile = fileContentSearch.split('\n')[1].substring(0, 8);
     const isValidNumMessage = fileContentSearch.split('\n')[1].substring(8, 22);
+
+
+
 
 
     //time value
@@ -323,6 +299,8 @@ function chekFileFletSupdes() {
     const lestline1 = fileContentSearch.split('\n')[lines.length - 2].substring(0, 8);
 
 
+
+
     if (
         //line 1
         compareStringsIgnoreCaseAndSpace(generalLineHeader, ENV00101) &&
@@ -334,7 +312,8 @@ function chekFileFletSupdes() {
 
         //line 2
         compareStringsIgnoreCaseAndSpace(firstLineDetailsFile, HEAD0101) &&
-        compareStringsIgnoreCaseAndSpace(isValidNumMessage, numMessage) &&
+
+        (isValidNumMessage.trim()!="" && numMessage.trim()==="" || isValidNumMessage.trim().includes(numMessage.trim()))&&
 
 
         booleneLength === true &&
@@ -362,7 +341,7 @@ function chekFileFletSupdes() {
 
 
         //barcode
-        constantValuesBarcodeBoolean === true && valuesBarcodeBoolean === true &&
+        constantValuesBarcodeBoolean === true && valuesBarcodeBoolean === true && ItemDataBoolean===true &&
 
         compareStringsIgnoreCaseAndSpace(lestline, HEAD9901) &&
 
@@ -393,12 +372,19 @@ function chekFileFletSupdes() {
         addElement('מספר ספק שגוי');
     }
 
+    // if (isValidNumSupplier.trim()==="" || !isValidNumSupplier.trim().includes(numSupplier.trim())) {
+    //     addElement('מספר ספק שגוי');
+    // }
+
 
     //line 2
     if (!compareStringsIgnoreCaseAndSpace(firstLineDetailsFile, HEAD0101)) {
         addElement('HEAD0101-ערך חסר');
     }
-    if (!compareStringsIgnoreCaseAndSpace(isValidNumMessage, numMessage)) {
+
+
+    if (isValidNumMessage.trim()==="" || numMessage.trim()!="" &&
+        !isValidNumMessage.trim().includes(numMessage.trim())) {
         addElement('מספר תעודה שגוי');
     }
 
@@ -425,7 +411,7 @@ function chekFileFletSupdes() {
 
 
     if (supplierSubnetNumber(numSupplierSubnetNumber, numMessage) === true && !compareStringsIgnoreCaseAndSpace(isValidNumSupplierSubnetNumber, numSupplier)) {
-        addElement('מספר ספק משני (שורה 2) שגוי או חסר');
+        addElement('מספר ספק משני/תת ספק שגוי או חסר');
     }
 
     if (supplierSubnetNumber(numSupplierSubnetNumber, numMessage) === false && !compareStringsIgnoreCaseAndSpace(isValidNumSupplierSubnetNumber, numSupplierSubnetNumber)) {
@@ -460,61 +446,56 @@ function chekFileFletSupdes() {
 
 
 
-
-
-
-    function supdes() {
-        console.log("Supdes function");
-        // Add your logic for Supdes here
-    }
-
-    function order() {
-        console.log("Order function");
-        // Add your logic for Order here
-    }
-
-    // Event listener for structure selection
-    document.getElementById('menuTypeStructure').addEventListener('change', function () {
-        var selectedStructureValue = this.value;
-
-        // Check the selected value and call the appropriate function
-        switch (selectedStructureValue) {
-            case 'fletFile':
-
-
-
-                document.getElementById('menuTypefile').addEventListener('change', function () {
-                    var selectedFileValue = this.value;
-
-                    // Check the selected value and call the appropriate function
-                    switch (selectedFileValue) {
-                        case 'order':
-                            order();
-                            break;
-                        // Add cases for other options as needed
-                        case 'supdes':
-                            supdes();
-                            break;
-                        // Default case if the selected option doesn't match any case
-                        default:
-                            console.log("Selected an option without a specific function.");
-                            break;
-                    }
-                });
-
-
-
-                break;
-            // Add cases for other options as needed
-
-            // Default case if the selected option doesn't match any case
-            default:
-                console.log("Selected an option without a specific function.");
-                break;
-        }
-    });
-
-
+    // function supdes() {
+    //     console.log("Supdes function");
+    //     // Add your logic for Supdes here
+    // }
+    //
+    // function order() {
+    //     console.log("Order function");
+    //     // Add your logic for Order here
+    // }
+    //
+    // // Event listener for structure selection
+    // document.getElementById('menuTypeStructure').addEventListener('change', function () {
+    //     var selectedStructureValue = this.value;
+    //
+    //     // Check the selected value and call the appropriate function
+    //     switch (selectedStructureValue) {
+    //         case 'fletFile':
+    //
+    //
+    //
+    //             document.getElementById('menuTypefile').addEventListener('change', function () {
+    //                 var selectedFileValue = this.value;
+    //
+    //                 // Check the selected value and call the appropriate function
+    //                 switch (selectedFileValue) {
+    //                     case 'order':
+    //                         order();
+    //                         break;
+    //                     // Add cases for other options as needed
+    //                     case 'supdes':
+    //                         supdes();
+    //                         break;
+    //                     // Default case if the selected option doesn't match any case
+    //                     default:
+    //                         console.log("Selected an option without a specific function.");
+    //                         break;
+    //                 }
+    //             });
+    //
+    //
+    //
+    //             break;
+    //         // Add cases for other options as needed
+    //
+    //         // Default case if the selected option doesn't match any case
+    //         default:
+    //             console.log("Selected an option without a specific function.");
+    //             break;
+    //     }
+    // });
 
 }
 
@@ -534,7 +515,7 @@ function chekFileFletSupdes() {
 
 function chekFileHashavshevtSupdes(){
     myArray = [];
-
+    myArraymessageRusltFromFile = [];
     function compareStringsIgnoreCaseAndSpace(valueFromFile, constantValue) {
         // Check if value is defined and not empty
         if (valueFromFile === undefined || valueFromFile.trim() === "") {
@@ -554,14 +535,12 @@ function chekFileHashavshevtSupdes(){
     const lines = fileContentSearch.split('\n');
     const secondToLastLine = lines[lines.length - 2];
 
-    // const numRetailer = document.getElementById('retailer').value;
+    const numRetailer = document.getElementById('retailer').value;
     const numSupplier = document.getElementById('supplier').value;
     const numMessage = document.getElementById('message').value;
     const numSupplierSubnetNumber = document.getElementById('supplierSubnetNumber').value;
     const numBranchRetailer = document.getElementById('branchRetailer').value;
 
-    const numRetailerOptionsList = document.getElementById('retailer').value.toLowerCase();
-    const numRetailer = options[numRetailerOptionsList];
 
 
     let numSupplierBoolean = true;
@@ -584,7 +563,12 @@ function chekFileHashavshevtSupdes(){
     let yearDataTime2Boolean = true;
     let numMessageBoolean = true;
 
+
+
+
+
     for (let i = 0; i < lines.length-1; i++) {
+        myArraymessageRusltFromFile = [];
         const isValidNumSupplier = fileContentSearch.split('\n')[i].substring(10, 23);
         const isValidNumSupplierSubnetNumber = fileContentSearch.split('\n')[i].substring(24, 37);
         const isValidNumRetailer = fileContentSearch.split('\n')[i].substring(38, 51);
@@ -608,6 +592,16 @@ function chekFileHashavshevtSupdes(){
         const isValidnumMessage = fileContentSearch.split('\n')[i].substring(151, 158);
 
 
+        // if (numRetailer1===undefined){
+        //     addElementmessageRusltFromFile("רשת: רשת לא קיימת ");
+        // }else {
+        //     addElementmessageRusltFromFile("רשת: "+numRetailer1);
+        // }
+        //
+        // addElementmessageRusltFromFile(isValidNumSupplier+":מספר ספק ");
+        // addElementmessageRusltFromFile(isValidnumMessage+":מספר תעודה ");
+        // addElementmessageRusltFromFile(numBranch1+":מספר סניף/מפתח ");
+
 
 
         if (!compareStringsIgnoreCaseAndSpace(isValidNumSupplier, numSupplier)) {
@@ -623,7 +617,7 @@ function chekFileHashavshevtSupdes(){
 
 
 
-        if (numSupplierSubnetNumber===""){
+        if (numSupplierSubnetNumber!=""){
             if (!compareStringsIgnoreCaseAndSpace(isValidNumSupplierSubnetNumber, numSupplier)) {
                 isValidNumSupplierSubnetNumberBoolean = false;
                 addElement("מספר ספק משני שגוי שורה " + (i + 1));
@@ -713,15 +707,18 @@ function chekFileHashavshevtSupdes(){
         }
 
 
+        // if (!compareStringsIgnoreCaseAndSpace(isValidnumMessage, numMessage)) {
+        //     numMessageBoolean = false;
+        //     addElement("מספר תעודה שגוי שורה "+ (i + 1));
+        //
+        // }
 
-
-        if (!compareStringsIgnoreCaseAndSpace(isValidnumMessage, numMessage)) {
-            numMessageBoolean = false;
-            addElement("מספר תעודה שגוי שורה "+ (i + 1));
-
+        if (numMessage.trim()!=""){
+            if(!compareStringsIgnoreCaseAndSpace(isValidnumMessage, numMessage)) {
+                numMessageBoolean = false;
+                addElement("מספר תעודה שגוי שורה "+ (i + 1));
+            }
         }
-
-
 
 
 
@@ -750,6 +747,8 @@ function chekFileHashavshevtSupdes(){
         && monthDataTime2Boolean
         && yearDataTime2Boolean
         && numMessageBoolean
+
+
     )
     {
         addElement("תעודה תקינה");
