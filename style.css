@@ -92,7 +92,7 @@ font-size: 20px;
     color: #4d4a4a;
     border-bottom: 2px solid #4CAF50;
     display: inline;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
 
 }
 
@@ -150,7 +150,7 @@ font-size: 20px;
     color: #4d4a4a;
     border-bottom: 2px solid #4CAF50;
     display: inline;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
 }
 
 
@@ -204,7 +204,7 @@ font-size: 20px;
     color: #4d4a4a;
     border-bottom: 2px solid #4CAF50;
     display: inline;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
 
 }
 
@@ -274,4 +274,73 @@ font-size: 20px;
 
 
 
+#messageRusltFromFile{
+    background-color: white;
+    position: absolute;
+    right: 511px;
+    top: 385px;
+    width: 230px;
+    height: 250px;
+    border: 1px solid #bdb8b8;
+    /*border-radius: 4px;*/
+    /*color:  #4d4a4a;*/
+    /*overflow: auto;*/
+}
 
+
+#messageRusltFromFile1 h {
+    position: absolute;
+    right: 540px;
+    top: 405px;
+    font-size: 20px;
+    color: #4d4a4a;
+    border-bottom: 2px solid #4CAF50;
+    display: inline;
+    padding-bottom: 3px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#selectedValue {
+    padding: 10px;
+    width: 200px;
+}
+
+.options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #d3d3d3;
+    border: 1px solid #ccc;
+    color: black;
+}
+
+.options-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.options-list li:hover {
+    background-color: #020202;
+}
