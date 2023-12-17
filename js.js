@@ -218,7 +218,7 @@ function chekFileFletSupdes() {
         for (let r = 3; r < lines.length - 3; r++) {
             const BarcodeArryStartOfLine = fileContentSearch.split('\n')[r].substring(0, 8);
             if (compareStringsIgnoreCaseAndSpace(BarcodeArryStartOfLine, LINE0101)){
-               r++
+                r++
             }
             const barcodeEmpty = fileContentSearch.split('\n')[r].substring(8, 9);
             const barcodeWithspaces = fileContentSearch.split('\n')[r].substring(9, 22);
@@ -258,16 +258,16 @@ function chekFileFletSupdes() {
 
     //valueFromFile line 1
     const generalLineHeader = fileContentSearch.split('\n')[0].substring(0, 8);
-    const isValidNumRetailer = fileContentSearch.split('\n')[0].substring(8, 22);
-    const MMDE02L = fileContentSearch.split('\n')[0].substring(23, 32);
-    const MMDE02R = fileContentSearch.split('\n')[0].substring(23, 32);
-    const SUPDES = fileContentSearch.split('\n')[0].substring(33, 46);
-    const isValidNumSupplier = fileContentSearch.split('\n')[0].substring(49, 67);
+    const isValidNumRetailer = fileContentSearch.split('\n')[0].substring(8, 23);
+    const MMDE02L = fileContentSearch.split('\n')[0].substring(23, 33);
+    const MMDE02R = fileContentSearch.split('\n')[0].substring(23, 33);
+    const SUPDES = fileContentSearch.split('\n')[0].substring(33, 47);
+    const isValidNumSupplier = fileContentSearch.split('\n')[0].substring(49, 64);
 
 
     //valueFromFile line 2
     const firstLineDetailsFile = fileContentSearch.split('\n')[1].substring(0, 8);
-    const isValidNumMessage = fileContentSearch.split('\n')[1].substring(8, 22);
+    const isValidNumMessage = fileContentSearch.split('\n')[1].substring(8, 23);
 
 
 
@@ -285,8 +285,8 @@ function chekFileFletSupdes() {
 
 
     //NumSupplierSubnetNumber+NumBranchRetailer
-    const isValidNumSupplierSubnetNumber = fileContentSearch.split('\n')[1].substring(104, 118);
-    const isValidNumBranchRetailer = fileContentSearch.split('\n')[1].substring(154, 168);
+    const isValidNumSupplierSubnetNumber = fileContentSearch.split('\n')[1].substring(104, 119);
+    const isValidNumBranchRetailer = fileContentSearch.split('\n')[1].substring(154, 169);
 
 
     //valueFromFile line 3
@@ -371,12 +371,8 @@ function chekFileFletSupdes() {
     if (!compareStringsIgnoreCaseAndSpace(isValidNumSupplier, numSupplier)) {
         addElement('מספר ספק שגוי');
     }
-
-    // if (isValidNumSupplier.trim()==="" || !isValidNumSupplier.trim().includes(numSupplier.trim())) {
-    //     addElement('מספר ספק שגוי');
-    // }
-
-
+    
+    
     //line 2
     if (!compareStringsIgnoreCaseAndSpace(firstLineDetailsFile, HEAD0101)) {
         addElement('HEAD0101-ערך חסר');
@@ -622,7 +618,7 @@ function chekFileHashavshevtSupdes(){
                 isValidNumSupplierSubnetNumberBoolean = false;
                 addElement("מספר ספק משני שגוי שורה " + (i + 1));
             }
-                }
+        }
 
 
 
@@ -634,8 +630,8 @@ function chekFileHashavshevtSupdes(){
         }
 
         if (numpPackaging.trim()===""){
-             numpPackagingBoolean = false;
-                addElement("מספר אריזות חסר שורה "+ (i + 1));
+            numpPackagingBoolean = false;
+            addElement("מספר אריזות חסר שורה "+ (i + 1));
         }
 
         if (barcode.trim()===""){
