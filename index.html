@@ -34,7 +34,7 @@
             <option value="return">החזרה</option>
         </select>
     </div>
-<!--input from user and icons-->
+    <!--input from user and icons-->
     <div class="inputBox">
         <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 10px"
            id="retailerIconX"></i>
@@ -90,8 +90,8 @@
 </div>
 <br><br><br>
 <!--multiple certificates-->
-<p class="moreFile" style="position: absolute ;font-size:12px;color: red;;right: 235px;top:228px">הזן מספר תעודה מתוך
-    תעודות מרובות</p>
+<h4 class="moreFile" style="position: absolute ;font-size:12px;color: red;;right: 230px;top:223px">הזן מספר תעודה מתוך
+    תעודות מרובות</h4>
 <!--up file input+drop-->
 <div class="upFile">
     <h1 id="titelFile">קבצים</h1>
@@ -220,6 +220,23 @@
 
 
 <script>
+
+    function cc() {
+        const vv = async () => {
+            const mm = await fetch("https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/eur.json", {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: "aaa",
+                    body: "yizhak"
+                }),
+
+            });
+            const rr = await mm.json();
+            console.log(rr)
+            vv();
+        }
+    }
+
     function checkEnter(event) {
         const AllData = document.querySelector('.AllData');
         if (AllData.style.display === "block") {
