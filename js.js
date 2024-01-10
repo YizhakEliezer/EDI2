@@ -38,7 +38,7 @@ function handleFiles(files) {
     console.log(files[0].type)
     if (allowedTypes.includes(files[0].type)) {
     } else {
-        alert(' פורמט '+files[0].type+" אינו מתאים ,אנא בחרו קובץ בפורמט תקין. ");
+        alert(' פורמט ('+files[0].type+") אינו מתאים ,אנא בחרו קובץ בפורמט תקין. ");
         // Clear the file input to prevent submitting an invalid file
         fileInput.value = '';
     }
