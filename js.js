@@ -78,7 +78,9 @@ function checkForValue(file) {
         const iconAndhandleDropP = document.getElementById('iconAndhandleDropP');
         const uploadiconDiv = document.getElementById('upload-iconDiv');
         const inputBoxData = document.getElementById('inputBoxData');
+         const resultsFile = document.getElementById('resultsFile');
         if (fileContent != undefined) {
+            resultsFile.style.display = 'block';
             AllData.style.display = 'block';
             messageRuslt1.style.display = 'block';
             upFile.style.position = 'absolute';
