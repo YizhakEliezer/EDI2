@@ -26,8 +26,8 @@
 #resultsFile {
     background-color: #ffffff;
     position: absolute;
-    right:515px;
-    /* right:990px; */
+/*     right:515px; */
+    right:990px;
     top: 20px;
     width:600px;
     height: 578px;
@@ -126,7 +126,7 @@
 #messageRuslt1 {
     background-color: white;
     position: absolute;
-    right:1170px;
+  right: 511px;
     top: 20px;
     width: 450px;
     height: 350px;
