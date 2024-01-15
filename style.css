@@ -26,13 +26,13 @@
 #resultsFile {
     background-color: #ffffff;
     position: absolute;
-    right:990px;
+    right:515px;
+    /* right:990px; */
     top: 20px;
     width:600px;
-    height: 800px;
+    height: 578px;
     border: 20px solid #c6c6c6;
     border-radius: 4px; 
-     display: none;
 }
 
 
@@ -46,8 +46,6 @@
     display: inline;
     padding-bottom: 3px;
 }
-
-
 
 
 
@@ -128,7 +126,7 @@
 #messageRuslt1 {
     background-color: white;
     position: absolute;
-    right: 511px;
+    right:1170px;
     top: 20px;
     width: 450px;
     height: 350px;
