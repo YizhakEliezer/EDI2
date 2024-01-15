@@ -14,7 +14,7 @@
 <body class="body" onkeydown="checkEnter(event)">
 <!--select of message types-->
 <div class="AllData">
-    <h1>פרטי התעודה</h1>
+    <h1>נתוני התעודה</h1>
     <div class="selectType">
         <!--pormat file-->
         <label for="fileStructure">מבנה המסר</label>
@@ -40,14 +40,14 @@
            id="retailerIconX"></i>
         <i class="fa-solid fa-check" style="color: #54f000;font-size: 15px;position:absolute; left: 20px;top: 10px"
            id="retailerIconV"></i>
-        <input type="text" id="retailer" list="jsonValuesRetailer" placeholder="(חובה) חפש\הזן מספר רשת">
+        <input type="text" id="retailer" list="jsonValuesRetailer" placeholder="(חובה) בחר רשת עבורה נשלחה התעודה">
         <br><br><br>
         <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 65px"
            id="supplierIconX"></i>
         <i class="fa-solid fa-check" style="color: #54f000;font-size: 15px;position:absolute; left: 20px;top: 65px"
            id="supplierIconV"></i>
         <label for="supplier"></label>
-        <input type="text" id="supplier" placeholder="(חובה) חפש\הזן מספר ספק" list="jsonValues">
+        <input type="text" id="supplier" placeholder="(חובה) בחר ספק שולח התעודה" list="jsonValues">
         <br><br><br>
         <i class="fa-solid fa-x" style="color: #fa0000;font-size: 15px;position:absolute; left: 20px;top: 120px"
            id="messageIconX"></i>
@@ -218,7 +218,9 @@
 <!--    </datalist>-->
 <!--</div>-->
 
-
+<div id="resultsFile">
+    <h1>פרטי התעודה</h1>
+</div>
 <script>
 
     function cc() {
