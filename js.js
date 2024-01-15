@@ -305,7 +305,7 @@ function chekFileFletSupdes() {
         let ItemDataBoolean = true;
 
         function constantValuesBarcode() {
-            for (let i = 3; i < lines.length - 3; i++) {
+            for (let i = 3; i < lines.length - 2; i++) {
                 const BarcodeArryStartOfLine = lines[i].substring(0, 8);
                 if (compareStringsIgnoreCaseAndSpace(BarcodeArryStartOfLine, LINE0201)) {
 
@@ -366,7 +366,7 @@ function chekFileFletSupdes() {
 
 
         function valuesBarcode() {
-            for (let r = 3; r < lines.length - 3; r++) {
+            for (let r = 3; r < lines.length - 2; r++) {
                 const BarcodeArryStartOfLine = lines[r].substring(0, 8);
                 if (compareStringsIgnoreCaseAndSpace(BarcodeArryStartOfLine, LINE0101)) {
                     r++
