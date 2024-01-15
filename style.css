@@ -1,12 +1,12 @@
 .body {
-    font-family: Arial;
+   font-family: Arial;
     background-color: #f0f0f3;
-    background-image: url(https://yizhakeliezer.github.io/EDI2/storenext.png");
+    /*//#e2ddff*/
+    background-image :url("https://yizhakeliezer.github.io/EDI2/storenext.png");
     background-size: 200px;
     background-repeat: no-repeat;
     background-position: revert;
     color: white;
-
 }
 
 .AllData {
